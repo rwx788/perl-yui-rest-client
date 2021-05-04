@@ -18,4 +18,10 @@ use constant API_VERSION => 'v1';
 use YuiRestClient::App;
 use YuiRestClient::Wait;
 
+=head1 NAME
+
+YuiRestClient - Perl module to interact with YaST applications via libyui-rest-api.
+
+=cut
+
 1;
