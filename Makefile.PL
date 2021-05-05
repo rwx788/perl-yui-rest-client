@@ -1,6 +1,11 @@
 use 5.018;
 use ExtUtils::MakeMaker;
 
+# Generate README.pod and inject current version to it and output as README
+my $preop =
+  'perldoc -uT $(VERSION_FROM) | sed s/%VERSION%/$(VERSION)/ > README.pod;' .
+  'pod2text README.pod | tee $(DISTVNAME)/README > README';
+
 WriteMakefile(
     NAME             => 'YuiRestClient',
     AUTHOR           => 'QE YaST',
@@ -17,8 +22,9 @@ WriteMakefile(
             }
         }
     },
+    NO_MYMETA          => 1,
     CONFIGURE_REQUIRES => {
-        "ExtUtils::MakeMaker" => 6.52
+        "ExtUtils::MakeMaker" => 6.58
     },
     PREREQ_PM => {
         'List::MoreUtils' => 0,
@@ -30,5 +36,8 @@ WriteMakefile(
 
     },
     TEST_REQUIRES => {
+    },
+    dist => {
+        PREOP => $preop,
     },
 );
