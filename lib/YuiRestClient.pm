@@ -53,6 +53,25 @@ This document describes L<YuiRestClient> version B<%VERSION%>.
 
 =cut
 
+=head1 INSTALLATION
+
+To manually install the package run following commands.
+
+=begin code
+perl Makefile.pl
+make manifest
+male install
+=end code
+
+To generate tarball, use:
+=begin code
+male dist
+=end code
+This command will also generate README file and update README.pod file.
+
+=cut
+
+
 =head1 LICENSE
 
 The perl module is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
