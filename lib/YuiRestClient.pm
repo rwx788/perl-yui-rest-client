@@ -63,7 +63,7 @@ generate README file and update README.pod file.
 
 =head1 LICENSE
 
-The perl module is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The perl module is available as open source under the terms of the L<MIT License|https://opensource.org/licenses/MIT>.
 
 =cut
 
