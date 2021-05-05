@@ -26,7 +26,7 @@ YuiRestClient - Perl module to interact with YaST applications via libyui-rest-a
 
 =head1 DESCRIPTION
 
-See documentation of the [libyui-rest-api project](https://github.com/libyui/libyui/tree/master/libyui-rest-api/doc)
+See documentation of the L<libyui-rest-api project|https://github.com/libyui/libyui/tree/master/libyui-rest-api/doc>.
 for more details about server side implementation.
 
 =cut

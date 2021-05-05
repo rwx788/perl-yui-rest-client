@@ -7,7 +7,7 @@ YuiRestClient - Perl module to interact with YaST applications via libyui-rest-a
 
 =head1 DESCRIPTION
 
-See documentation of the [libyui-rest-api project](https://github.com/libyui/libyui/tree/master/libyui-rest-api/doc)
+See documentation of the L<libyui-rest-api project|https://github.com/libyui/libyui/tree/master/libyui-rest-api/doc>.
 for more details about server side implementation.
 
 
@@ -33,6 +33,25 @@ This document describes L<YuiRestClient> version B<0.1>.
   $app->check_connection();
   my $btn = $app->button({id => 'btn_ok'});
   $btn->click();
+
+
+=cut
+
+=head1 INSTALLATION
+
+To manually install the package run following commands.
+
+=begin code
+perl Makefile.pl
+make manifest
+male install
+=end code
+
+To generate tarball, use:
+=begin code
+male dist
+=end code
+This command will also generate README file and update README.pod file.
 
 
 =cut
