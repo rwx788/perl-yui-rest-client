@@ -1,0 +1,10 @@
+.*~$
+.*\.(bak|old|tmp)$
+\.git/.*
+\.gitignore
+
+MANIFEST.SKIP
+Makefile
+Makefile.PL
+README.pod
+.*.tag.gz

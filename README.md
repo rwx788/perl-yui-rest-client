@@ -1,1 +1,0 @@
-# perl-yui-rest-client
