@@ -1,10 +1,9 @@
 use 5.018;
 use ExtUtils::MakeMaker;
 
-# Generate README.pod and inject current version to it and output as README
-# Also, trye generate pod for all pm in lib directory
+# Generate README.pod and output as README and pods for all modules in lib
 my $preop =
-  'perldoc -uTF $(VERSION_FROM) | sed s/%VERSION%/$(VERSION)/ > README.pod; \\' .
+  'perldoc -uTF $(VERSION_FROM) > README.pod; \\' .
   'pod2text README.pod | tee $(DISTVNAME)/README > README; \\' .
   'find lib/ | grep -oP ".*(?=\.pm)" | xargs -I{} perldoc -uTF -d $(DISTVNAME)/{}.pod {}.pm || true';
 
