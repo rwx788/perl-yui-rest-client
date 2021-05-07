@@ -9,7 +9,7 @@
 
 # Maintainer: QE YaST <qa-sle-yast@suse.de>
 
-package YuiRestClient 0.2;
+package YuiRestClient 0.3;
 use strict;
 use warnings;
 
