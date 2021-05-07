@@ -34,7 +34,6 @@ WriteMakefile(
         'parent'          => 0,
         'strict'          => 0,
         'warnings'        => 0,
-
     },
     TEST_REQUIRES => {
     },
