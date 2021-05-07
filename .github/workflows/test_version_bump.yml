@@ -1,0 +1,27 @@
+name: CI Makefile
+
+on:
+  pull_request:
+    paths-ignore:
+      - '.github/**'
+      - '.gitignore'
+
+jobs:
+  perl-job:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        perl-version:
+          - 'latest'
+    container:
+      image: perldocker/perl-tester:${{ matrix.perl-version }}     # https://hub.docker.com/r/perldocker/perl-tester
+    name: Test version is updated
+    steps:
+      - uses: actions/checkout@v2
+      - name: Regular tests
+        run: |
+            cpanm --installdeps --notest .
+            perl Makefile.PL
+            make
+            make dist
