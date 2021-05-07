@@ -6,6 +6,7 @@ jobs:
   perl-job:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: true
       matrix:
         perl-version:
           - '5.32'
