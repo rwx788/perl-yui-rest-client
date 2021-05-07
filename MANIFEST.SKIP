@@ -7,8 +7,6 @@ blib/.*
 YuiRestClient-.*
 
 pm_to_blib
-MANIFEST.SKIP
 Makefile
-Makefile.PL
 README.pod
 .*.tar.gz
