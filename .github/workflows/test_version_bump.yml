@@ -1,4 +1,4 @@
-name: CI Makefile
+name: Check version bump
 
 on:
   pull_request:
@@ -9,19 +9,11 @@ on:
 jobs:
   perl-job:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        perl-version:
-          - 'latest'
     container:
-      image: perldocker/perl-tester:${{ matrix.perl-version }}     # https://hub.docker.com/r/perldocker/perl-tester
-    name: Test version is updated
+      image: perldocker/perl-tester:latest     # https://hub.docker.com/r/perldocker/perl-tester
     steps:
       - uses: actions/checkout@v2
-      - name: Regular tests
+      - name: Test version is updated
         run: |
-            cpanm --installdeps --notest .
-            perl Makefile.PL
-            make
-            make dist
+          git fetch origin main
+          git --no-pager diff origin/main lib/YuiRestClient.pm | grep -P 'package YuiRestClient \d+(.\d+)?;'
