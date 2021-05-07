@@ -28,6 +28,16 @@ sub new {
     }, $class;
 }
 
+sub get_port {
+    my ($self) = @_;
+    return $self->{port};
+}
+
+sub get_host {
+    my ($self) = @_;
+    return $self->{host};
+}
+
 sub set_timeout {
     my ($self, $timeout) = @_;
     $self->{timeout} = $timeout;
@@ -44,8 +54,8 @@ sub set_host {
 }
 
 sub set_port {
-    my ($self, $host) = @_;
-    $self->{host} = $host;
+    my ($self, $port) = @_;
+    $self->{port} = $port;
 }
 
 sub find {
