@@ -18,11 +18,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: |
+          apt-get install -qq parallel
           cpanm --installdeps --notest .
           perl Makefile.PL
       - name: Test compilation
         run: |
-          find lib/ -name *.pm | parallel perl -I ./lib
+          find lib/ -name *.pm | parallel perl -I ./lib -c
       - name: Regular tests
         run: |
           make
