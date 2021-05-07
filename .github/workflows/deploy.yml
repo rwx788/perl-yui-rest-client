@@ -11,14 +11,9 @@ on:
 jobs:
   perl-job:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        perl-version:
-          - '5.32'
-          - 'latest'
     container:
-      image: perldocker/perl-tester:${{ matrix.perl-version }}
-    name: Perl ${{ matrix.perl-version }}
+      image: perldocker/perl-tester:latest
+    name: Test
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
@@ -28,7 +23,7 @@ jobs:
           perl Makefile.PL
       - name: Test compilation
         run: |
-          find lib/ -name *.pm | parallel perl -I ./lib
+          find lib/ -name *.pm | parallel perl -I ./lib -c
       - name: Run regular tests
         run: |
           make
