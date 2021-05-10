@@ -1,0 +1,35 @@
+name: Test compilation, run tests and build
+
+on:  pull_request
+
+jobs:
+  perl-job:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        perl-version:
+          - '5.32'
+          - 'latest'
+    container:
+      image: perldocker/perl-tester:${{ matrix.perl-version }}
+    name: Perl ${{ matrix.perl-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          apt-get install -qq parallel
+          cpanm --installdeps --notest .
+          perl Makefile.PL
+      - name: Test compilation
+        run: |
+          find lib/ -name *.pm | parallel perl -I ./lib -c
+      - name: Regular tests
+        run: |
+          make
+          make test
+      - name: Test cpanm deploy
+        run: |
+          make manifest
+          make dist
+          cpan-upload --dry-run YuiRestClient-*.tar.gz -u QEYAST -p test

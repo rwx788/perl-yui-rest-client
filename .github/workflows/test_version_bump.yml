@@ -1,0 +1,19 @@
+name: Check version bump
+
+on:
+  pull_request:
+    paths-ignore:
+      - '.github/**'
+      - '.gitignore'
+
+jobs:
+  perl-job:
+    runs-on: ubuntu-latest
+    container:
+      image: perldocker/perl-tester:latest     # https://hub.docker.com/r/perldocker/perl-tester
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test version is updated
+        run: |
+          git fetch origin main
+          git --no-pager diff origin/main lib/YuiRestClient.pm | grep -P 'package YuiRestClient \d+(.\d+)?;'

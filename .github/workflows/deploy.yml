@@ -1,0 +1,37 @@
+name: Deploy
+
+on:
+  push:
+    paths-ignore:
+      - '.github/**'
+      - '.gitignore'
+    branches:
+      - main
+
+jobs:
+  perl-job:
+    runs-on: ubuntu-latest
+    container:
+      image: perldocker/perl-tester:latest
+    name: Test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          apt-get install -qq parallel
+          cpanm --installdeps --notest .
+          perl Makefile.PL
+      - name: Test compilation
+        run: |
+          find lib/ -name *.pm | parallel perl -I ./lib -c
+      - name: Run regular tests
+        run: |
+          make
+          make test
+      - name: CPAN deploy
+        env:
+          CPAN_QE_YAST_PASSWORD: ${{ secrets.CPAN_QE_YAST_PASSWORD }}
+        run: |
+          make manifest
+          make dist
+          cpan-upload YuiRestClient-*.tar.gz -u QEYAST -p $CPAN_QE_YAST_PASSWORD --retries 2
